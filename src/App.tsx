@@ -713,7 +713,7 @@ export default function App() {
   }, []);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/MedIntelWebpage/">
       <CustomCursor />
       <AnimatePresence mode="wait">
         {loading && <Loader key="loader" />}
