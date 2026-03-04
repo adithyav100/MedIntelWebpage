@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform, useInView } from 'motion/react';
-import { Search, ArrowRight, Activity, Shield, Zap, ChevronDown, Check, Star, ArrowUpRight, Pill, Menu, X, Info, AlertTriangle, RefreshCw, Sparkles, Database, Fingerprint, Layers } from 'lucide-react';
+import { motion, AnimatePresence, useInView } from 'motion/react';
+import { Search, ArrowRight, Activity, Shield, Zap, ChevronDown, Check, ArrowUpRight, AlertTriangle, Sparkles, Database, Fingerprint, Layers } from 'lucide-react';
 import { cn } from './utils';
 import { ContainerScroll } from './components/ui/container-scroll-animation';
 import { Hero } from './components/ui/animated-hero';
@@ -23,10 +23,10 @@ const CustomCursor = () => {
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (
-        target.tagName.toLowerCase() === 'a' || 
-        target.tagName.toLowerCase() === 'button' || 
-        target.closest('a') || 
-        target.closest('button') || 
+        target.tagName.toLowerCase() === 'a' ||
+        target.tagName.toLowerCase() === 'button' ||
+        target.closest('a') ||
+        target.closest('button') ||
         target.closest('.interactive')
       ) {
         setIsHovering(true);
@@ -154,7 +154,7 @@ const Navbar = () => {
           </div>
           <span className="text-xl font-bold tracking-tight">MedIntel</span>
         </Link>
-        
+
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
           {['Search', 'Compare', 'Insights', 'API'].map((item) => (
             <Link key={item} to={`/${item.toLowerCase().replace(' ', '-')}`} className="hover:text-white transition-colors interactive">
@@ -215,8 +215,8 @@ const SearchSection = () => {
     { name: "Azithromycin 250mg", salt: "Azithromycin", type: "Antibiotic", price: "$14.00", match: "88%" },
   ];
 
-  const results = query.trim() === '' 
-    ? allResults.slice(0, 3) 
+  const results = query.trim() === ''
+    ? allResults.slice(0, 3)
     : allResults.filter(r => r.name.toLowerCase().includes(query.toLowerCase()) || r.salt.toLowerCase().includes(query.toLowerCase())).slice(0, 4);
 
   return (
@@ -260,7 +260,7 @@ const SearchSection = () => {
             <div className="glass-panel rounded-3xl p-6 relative z-10">
               <div className="flex items-center gap-3 mb-6 pb-6 border-b border-white/5">
                 <Search className="w-5 h-5 text-gray-400" />
-                <input 
+                <input
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
@@ -268,7 +268,7 @@ const SearchSection = () => {
                   className="bg-transparent border-none outline-none text-lg text-white w-full placeholder-gray-600"
                 />
               </div>
-              
+
               <div className="space-y-4">
                 {results.length > 0 ? results.map((result, i) => (
                   <motion.div
@@ -299,7 +299,7 @@ const SearchSection = () => {
                 )}
               </div>
             </div>
-            
+
             {/* Decorative elements */}
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-cyan-500/20 rounded-full blur-3xl" />
             <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-green-400/20 rounded-full blur-3xl" />
@@ -318,7 +318,7 @@ const ComparisonSection = () => {
   return (
     <section id="compare" className="py-32 relative bg-[#0a1526]" ref={ref}>
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <motion.div 
+        <motion.div
           className="text-center max-w-3xl mx-auto mb-20"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -389,7 +389,7 @@ const ComparisonSection = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-green-400/10 blur-3xl rounded-full" />
-            
+
             <div className="flex justify-between items-start mb-8 relative z-10">
               <div>
                 <span className="text-xs font-medium text-green-400 uppercase tracking-wider mb-2 block">Generic Alternative</span>
@@ -437,7 +437,7 @@ const DetailAccordion = ({ title, icon: Icon, children, defaultOpen = false }: a
 
   return (
     <div className="border-b border-white/10 last:border-0">
-      <button 
+      <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-6 flex items-center justify-between text-left interactive group"
       >
@@ -507,7 +507,7 @@ const MedicineDetail = () => {
             <p className="mb-4">Contains <strong className="text-white">Paracetamol 500mg</strong> and <strong className="text-white">Caffeine 50mg</strong>.</p>
             <p>Paracetamol acts as an analgesic and antipyretic, while caffeine enhances its pain-relieving effects by increasing absorption and acting as a mild stimulant.</p>
           </DetailAccordion>
-          
+
           <DetailAccordion title="Primary Uses" icon={Activity}>
             <ul className="list-disc pl-4 space-y-2">
               <li>Relief from mild to moderate pain (headaches, migraines, toothaches).</li>
@@ -605,7 +605,7 @@ const Footer = () => {
     <footer className="pt-32 pb-12 relative border-t border-white/5 overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[1px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
       <div className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-cyan-900/10 to-transparent pointer-events-none" />
-      
+
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 mb-20">
           <div className="col-span-2 lg:col-span-2">
@@ -619,7 +619,7 @@ const Footer = () => {
               Empowering patients and professionals with AI-driven medical intelligence, transparent pricing, and clinical-grade comparisons.
             </p>
           </div>
-          
+
           <div>
             <h4 className="text-white font-semibold mb-6">Product</h4>
             <ul className="space-y-4 text-gray-400 text-sm">
@@ -678,7 +678,7 @@ const PlaceholderPage = ({ title }: { title: string }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [title]);
-  
+
   return (
     <div className="min-h-screen pt-40 pb-20 px-6 flex flex-col items-center justify-center text-center relative overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
@@ -718,9 +718,9 @@ export default function App() {
       <AnimatePresence mode="wait">
         {loading && <Loader key="loader" />}
       </AnimatePresence>
-      
+
       {!loading && (
-        <motion.div 
+        <motion.div
           className="bg-[#050b14] min-h-screen text-white selection:bg-cyan-500/30 flex flex-col"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
