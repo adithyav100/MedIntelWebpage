@@ -15,13 +15,7 @@ export const AIDashboardImage = () => {
 
     const generateImage = async () => {
       try {
-        const result = await ai.generateContent({
-          contents: [{
-            parts: [{
-              text: 'A futuristic, ultra-modern medical intelligence dashboard interface on a dark background, glowing cyan and green data visualizations, glassmorphism UI, high tech, cinematic lighting, highly detailed, professional UI/UX design.'
-            }]
-          }]
-        });
+        const result = await ai.generateContent('A futuristic, ultra-modern medical intelligence dashboard interface on a dark background, glowing cyan and green data visualizations, glassmorphism UI, high tech, cinematic lighting, highly detailed, professional UI/UX design.');
         const response = await result.response;
 
         for (const part of response.candidates?.[0]?.content?.parts || []) {
