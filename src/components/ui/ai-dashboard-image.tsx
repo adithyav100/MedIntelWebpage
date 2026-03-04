@@ -3,7 +3,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { Activity } from 'lucide-react';
 
 // Initialize Gemini API
-const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || "");
+const genAI = new GoogleGenerativeAI((import.meta as any).env.VITE_GEMINI_API_KEY || "");
 const ai = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 export const AIDashboardImage = () => {
@@ -15,16 +15,14 @@ export const AIDashboardImage = () => {
 
     const generateImage = async () => {
       try {
-        const response = await ai.models.generateContent({
-          model: 'gemini-2.5-flash-image',
-          contents: {
-            parts: [
-              {
-                text: 'A futuristic, ultra-modern medical intelligence dashboard interface on a dark background, glowing cyan and green data visualizations, glassmorphism UI, high tech, cinematic lighting, highly detailed, professional UI/UX design.',
-              },
-            ],
-          },
+        const result = await ai.generateContent({
+          contents: [{
+            parts: [{
+              text: 'A futuristic, ultra-modern medical intelligence dashboard interface on a dark background, glowing cyan and green data visualizations, glassmorphism UI, high tech, cinematic lighting, highly detailed, professional UI/UX design.'
+            }]
+          }]
         });
+        const response = await result.response;
 
         for (const part of response.candidates?.[0]?.content?.parts || []) {
           if (part.inlineData) {
