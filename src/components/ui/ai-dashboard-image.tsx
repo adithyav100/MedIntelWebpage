@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { GoogleGenAI } from '@google/genai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import { Activity } from 'lucide-react';
 
 // Initialize Gemini API
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY || "");
+const ai = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 export const AIDashboardImage = () => {
   const [imageUrl, setImageUrl] = useState<string | null>(localStorage.getItem('ai_dashboard_img'));
@@ -24,7 +24,7 @@ export const AIDashboardImage = () => {
             ],
           },
         });
-        
+
         for (const part of response.candidates?.[0]?.content?.parts || []) {
           if (part.inlineData) {
             const base64EncodeString = part.inlineData.data;
