@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { Activity } from 'lucide-react';
 
