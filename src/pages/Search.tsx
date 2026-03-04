@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { useSearchParams, useNavigate, Link } from 'react-router-dom';
-import { Search as SearchIcon, Activity, ArrowRight, Pill, Filter, ArrowUpRight } from 'lucide-react';
+import { Search as SearchIcon, Pill, Filter, ArrowUpRight } from 'lucide-react';
 import { Button } from '../components/ui/button';
 
 // Mock database of medicines
@@ -23,7 +23,7 @@ const MEDICINE_DATABASE = [
 export default function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  
+
   const initialQuery = searchParams.get('q') || '';
   const [query, setQuery] = useState(initialQuery);
   const [results, setResults] = useState(MEDICINE_DATABASE);
@@ -31,13 +31,13 @@ export default function SearchPage() {
   useEffect(() => {
     const q = searchParams.get('q') || '';
     setQuery(q);
-    
+
     if (q.trim() === '') {
       setResults(MEDICINE_DATABASE);
     } else {
       const lowerQ = q.toLowerCase();
-      const filtered = MEDICINE_DATABASE.filter(med => 
-        med.name.toLowerCase().includes(lowerQ) || 
+      const filtered = MEDICINE_DATABASE.filter(med =>
+        med.name.toLowerCase().includes(lowerQ) ||
         med.salt.toLowerCase().includes(lowerQ) ||
         med.type.toLowerCase().includes(lowerQ)
       );
@@ -58,7 +58,7 @@ export default function SearchPage() {
     <div className="min-h-screen pt-32 pb-20 px-6 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-cyan-500/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none" />
-      
+
       <div className="max-w-5xl mx-auto relative z-10">
         {/* Search Header */}
         <motion.div
@@ -72,7 +72,7 @@ export default function SearchPage() {
             <span className="text-gray-600">/</span>
             <span className="text-cyan-400 font-medium">Search Engine</span>
           </div>
-          
+
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-8">
             Medical <span className="text-gradient">Search Engine</span>
           </h1>
@@ -83,11 +83,11 @@ export default function SearchPage() {
               <div className="pl-4 pr-2 text-gray-400">
                 <SearchIcon className="w-6 h-6" />
               </div>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search by medicine name, salt, or category (e.g., Antibiotic)..." 
+                placeholder="Search by medicine name, salt, or category (e.g., Antibiotic)..."
                 className="w-full bg-transparent border-none outline-none text-white placeholder-gray-500 py-4 text-lg"
               />
               <Button type="submit" className="px-6 py-4 rounded-xl font-semibold flex items-center gap-2 h-auto">
@@ -100,7 +100,7 @@ export default function SearchPage() {
         {/* Results Section */}
         <div className="grid md:grid-cols-4 gap-8">
           {/* Filters Sidebar */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -111,7 +111,7 @@ export default function SearchPage() {
                 <Filter className="w-5 h-5 text-cyan-400" />
                 <h3 className="font-semibold text-white">Filters</h3>
               </div>
-              
+
               <div className="space-y-6">
                 <div>
                   <h4 className="text-sm font-medium text-gray-400 mb-3">Category</h4>
@@ -165,7 +165,7 @@ export default function SearchPage() {
                           <p className="text-xs text-gray-500">Mfr: {result.manufacturer}</p>
                         </div>
                       </div>
-                      
+
                       <div className="flex md:flex-col items-center md:items-end justify-between md:justify-center border-t border-white/5 md:border-t-0 pt-4 md:pt-0">
                         <div className="text-2xl font-bold text-white mb-1">{result.price}</div>
                         <div className="flex items-center gap-2">
@@ -180,7 +180,7 @@ export default function SearchPage() {
                 ))}
               </div>
             ) : (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 className="glass-panel rounded-3xl p-12 text-center flex flex-col items-center justify-center"
@@ -192,12 +192,12 @@ export default function SearchPage() {
                 <p className="text-gray-400 max-w-md mx-auto">
                   We couldn't find any matches for "{query}". Try checking for typos or searching by active ingredient (salt) instead.
                 </p>
-                <Button 
+                <Button
                   onClick={() => {
                     setQuery('');
                     setSearchParams({});
                   }}
-                  variant="outline" 
+                  variant="outline"
                   className="mt-8"
                 >
                   Clear Search
